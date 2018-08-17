@@ -5,18 +5,29 @@
  */
 package View;
 
+import DBO.Produto;
+import Estruturas.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 /**
  *
  * @author Jansley Felipe
  */
 public class AdicionarExcluir extends javax.swing.JFrame {
-
+    private List<Produto> produto = new List<Produto>();
+    private Produto elemento;
+    private String nome, cod, apli;
+    private int qtd;
+    
     /**
      * Creates new form AdicionarExcluir
      */
     public AdicionarExcluir() {
         initComponents();
         this.setLocationRelativeTo(null);
+        elemento = null;
     }
 
     /**
@@ -49,6 +60,11 @@ public class AdicionarExcluir extends javax.swing.JFrame {
         jLabel4.setText("Quantidade");
 
         BTN_add.setLabel("Adicionar");
+        BTN_add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_addActionPerformed(evt);
+            }
+        });
 
         BTN_excluir.setLabel("Excluir");
 
@@ -120,6 +136,19 @@ public class AdicionarExcluir extends javax.swing.JFrame {
     private void BTN_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_cancelarActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_BTN_cancelarActionPerformed
+
+    private void BTN_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_addActionPerformed
+        try {
+            nome = TXT_nome.getText();
+            cod = TXT_codigo.getText();
+            apli = TXT_app.getText();
+            qtd = Integer.valueOf(TXT_qtd.getText());
+            elemento = new Produto(nome, cod, apli, qtd);
+            produto.insertElementIndex(elemento, 0);
+        } catch (Exception error) {
+            System.err.println("Produto vazio!");
+        }
+    }//GEN-LAST:event_BTN_addActionPerformed
 
     /**
      * @param args the command line arguments
